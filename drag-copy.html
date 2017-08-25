@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>drag img to div</title>
+    <style type="text/css">
+        #target_box{
+            width: 200px;
+            height: 200px;
+            border:1px solid #cccccc;
+            padding: 10px;
+            margin: 0 auto;
+        }
+        #srcObj{
+            widtrh:100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="target_box"></div>
+<img src="01.jpg" id="srcObj" >
+
+<script type="text/javascript">
+    (function () {
+        function $(id) {
+            return document.getElementById(id);
+        }
+        var targetObj = $('target_box');
+        var srcObj = $('srcObj');
+        targetObj.ondragenter = function () {
+            this.style.borderColor = 'lightgreen';
+        }
+        targetObj.ondragover = function (ev) {
+            ev.preventDefault();
+        }
+        targetObj.ondrop = function () {
+            this.style.borderColor = 'pink';
+            this.appendChild(srcObj);
+        }
+        targetObj.ondropleave = function () {
+            this.style.borderColor = 'blue';
+        }
+    })();
+</script>
+</body>
+</html>
