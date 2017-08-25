@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>drag</title>
+    <style type="text/css">
+        #drag_box{
+            width:100px;
+            height:100px;
+            background: #ccc;
+        }
+    </style>
+    <script src="jquery-3.1.0.min.js"></script>
+</head>
+<body>
+
+<div id="drag_box" draggable="true"></div>
+
+<script type="text/javascript">
+    (function(){
+        function $(id){
+            return document.getElementById(id);
+        }
+        var oDrag = $('drag_box');
+        oDrag.ondragstart=function(){
+            this.style.background="green";
+        }
+        oDrag.ondrag=function(){
+            this.innerHTML="拖拽中...";
+        }
+        oDrag.ondragend=function(){
+            this.style.background="#f55";
+            this.innerHTML="拖拽结束";
+        }
+    })();
+</script>
+</body>
+</html>
