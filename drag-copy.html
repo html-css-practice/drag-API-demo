@@ -12,7 +12,7 @@
             margin: 0 auto;
         }
         #srcObj{
-            widtrh:100px;
+            width:100px;
             height: 100px;
         }
     </style>
@@ -36,7 +36,12 @@
         }
         targetObj.ondrop = function () {
             this.style.borderColor = 'pink';
-            this.appendChild(srcObj);
+   //         this.appendChild(srcObj);  //拖动到目标div
+            var copy = srcObj.cloneNode();
+            copy.removeAttribute('id');
+            copy.style.width = '100px';
+            copy.style.height = '100px';
+            this.appendChild(copy);
         }
         targetObj.ondropleave = function () {
             this.style.borderColor = 'blue';
