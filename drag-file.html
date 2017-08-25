@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>drag file</title>
+    <style type="text/css">
+        #target_box{
+            width: 200px;
+            height:200px;
+            background: #cccccc;
+            line-height: 200px;
+            text-align: center;
+            font-size: 16px;
+        }
+        img{
+            width:100px;
+            height: 100px;
+            display: block;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="target_box"></div>
+
+<script type="text/javascript">
+    (function () {
+        function $(id) {
+            return document.getElementById(id);
+        }
+
+        var oTarget = $('target_box');
+        oTarget.ondragenter = function () {
+            this.style.background = 'pink';
+        }
+        oTarget.ondragover = function (ev) {
+            this.innerHTML = "在元素在中移动";
+            ev.preventDefault();
+        }
+        oTarget.ondrop = function (ev) {
+            ev.preventDefault();
+            this.innerHTML = "元素已添加";
+            var files = ev.dataTransfer.files;
+            for(var i = 0; i < files.length; i++){
+                var filesReader = new FileReader();
+                filesReader.readAsDataURL(files[i]);
+                filesReader.onload = function () {
+                    var oImg = document.createElement('img');
+                    oImg.src = this.result;
+                    document.body.appendChild(oImg);
+                }
+            }
+        }
+    })();
+</script>
+</body>
+</html>
