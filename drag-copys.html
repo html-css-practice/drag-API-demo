@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>drag copy img</title>
+    <style type="text/css">
+        #target_box{
+            width: 450px;
+            height: 550px;
+            border:1px solid #cccccc;
+            padding: 30px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div id="target_box"></div>
+<img src="img/02.jpg">
+<img src="img/03.jpg">
+<img src="img/04.jpg">
+<img src="img/05.jpg">
+<script type="text/javascript">
+    var imgList = document.querySelectorAll('img');
+    var targetObj = document.getElementById('target_box');
+    for(var i=0; i<imgList.length; i++){
+        var img = imgList[i];
+        img.ondragstart = function(event){
+            event.dataTransfer.setData('text/html', this.getAttribute('src')); //保存数据-海南装拖拉机
+        }
+        img.ondrag = function(){
+        }
+        img.ondragend = function(){
+        }
+    }
+    targetObj.ondragenter = function(){
+    }
+    targetObj.ondragover = function(event){
+        event.preventDefault();
+    }
+    targetObj.ondrop = function(event){
+        var d = event.dataTransfer.getData('text/html');
+        var img = document.querySelector('[src="'+d+'"]');
+        this.appendChild(img);
+    }
+    targetObj.ondragleave = function(){
+    }
+</script>
+</body>
+</html>
